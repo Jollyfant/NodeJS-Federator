@@ -32,7 +32,7 @@ module.exports = function(Service) {
       "format": "get"
     }
 
-    // Check required
+    // Check required start and end time
     if(stream.start === null) {
       return new FederatorError(req, res, ERROR.START_REQUIRED);
     }
@@ -70,6 +70,7 @@ module.exports = function(Service) {
 
         req.StreamHandler.nBytes += thread.nBytes;
 
+        // Write headers once
         if(!req.StreamHandler.headersSent) {
           res.setHeader("Content-Type", DATASELECT_CONTENT_MIME_TYPE);
           res.setHeader("Content-Disposition", "attachment; filename=" + req.StreamHandler.GenerateFilename());

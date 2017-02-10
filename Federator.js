@@ -81,6 +81,9 @@ module.exports = function(CONFIG, federatorCallback) {
   require("./routes/Dataselect")(Federator);
   require("./routes/Station")(Federator);
 
+  require("./routes/StationWADL")(Federator);
+  require("./routes/DataselectWADL")(Federator);
+
   // Listen to incoming HTTP requests
   var server = Federator.listen(CONFIG.PORT, CONFIG.HOST, function() {
 
