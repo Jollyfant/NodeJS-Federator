@@ -10,6 +10,7 @@
 
 const StreamHandler = require("../lib/Handler");
 const ERROR = require("../static/Errors");
+const FederatorError = require("../lib/Error");
 
 const DATASELECT_CONTENT_MIME_TYPE = "application/vnd.fdsn.mseed";
 
@@ -32,11 +33,11 @@ module.exports = function(Service, CONFIG) {
 
     // Check required
     if(stream.start === null) {
-      return res.status(400).send(ERROR.START_REQUIRED);
+      return new FederatorError(req, res, ERROR.START_REQUIRED);
     }
 
     if(stream.end === null) {
-      return res.status(400).send(ERROR.END_REQUIRED);
+      return new FederatorError(req, res, ERROR.END_REQUIRED);
     }
 
     stream.start = new Date(stream.start);
@@ -44,10 +45,11 @@ module.exports = function(Service, CONFIG) {
 
     // Check validity of start and end time
     if(isNaN(stream.start)) {
-      return res.status(400).send(ERROR.INVALID_START);
+      return new FederatorError(req, res, ERROR.INVALID_START);
     }
+
     if(isNaN(stream.end)) {
-      return res.status(400).send(ERROR.INVALID_END);
+      return new FederatorError(req, res, ERROR.INVALID_END);
     }
 
     // Convert start and end to ISOString for routing service

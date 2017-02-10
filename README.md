@@ -6,6 +6,7 @@ NodeJS Implementation of EIDA Federator.
 * `PORT` - Port to expose the service on
 * `HOST` - Host to expose the service on
 * `NAME` - Name of the service
+* `LOGPATH` - Path to where to save logfiles
 * `MAXIMUM_NUMBER_OF_THREADS` - Number of simultaneous threads
 * `MAXIMUM_BYTES_FLUSH` - Maximum number of bytes cached in memory for a single thread before flushing
 * `VERISON` - Service version

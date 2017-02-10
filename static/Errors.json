@@ -11,8 +11,20 @@
     "code": 400,
     "message": "The routing service returned an error. Not telling you what error yet."
   },
-  "INVALID_START": "The submitted start time is invalid",
-  "INVALID_END": "The submitted end time is invalid",
-  "START_REQUIRED": "A valid start time is required",
-  "END_REQUIRED": "A valid end time is required"
+  "INVALID_START": {
+    "code": 400,
+    "message": "The submitted start time is invalid"
+  },
+  "INVALID_END": {
+    "code": 400,
+    "message": "The submitted end time is invalid"
+  },
+  "START_REQUIRED": {
+    "code": 400,
+    "message": "A valid start time is required"
+  },
+  "END_REQUIRED": {
+    "code": 400,
+    "message": "A valid end time is required"
+  }
 }

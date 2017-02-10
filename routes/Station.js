@@ -11,6 +11,7 @@
 
 const StreamHandler = require("../lib/Handler");
 const ERROR = require("../static/Errors");
+const FederatorError = require("../lib/Error");
 
 const STATION_CONTENT_MIME_TYPE = "application/xml";
 
@@ -46,7 +47,7 @@ module.exports = function(Service, CONFIG) {
     if(stream.start) {
       stream.start = new Date(stream.start);
       if(isNaN(stream.start)) {
-        return res.status(400).send(ERROR.INVALID_START);
+        return new FederatorError(req, res, ERROR.INVALID_START);
       }
       stream.start = stream.start.toISOString();
     }
@@ -54,7 +55,7 @@ module.exports = function(Service, CONFIG) {
     if(stream.end) {
       stream.end = new Date(stream.end);
       if(isNaN(stream.end)) {
-        return res.status(400).send(ERROR.INVALID_END);
+        return new FederatorError(req, res, ERROR.INVALID_END);
       }
       stream.end = stream.end.toISOString();
     }

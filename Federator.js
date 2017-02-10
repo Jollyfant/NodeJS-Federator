@@ -22,6 +22,7 @@ const Federator = require("express")();
 const StreamHandler = require("./lib/Handler");
 
 const ERROR = require("./static/Errors");
+const FederatorError = require("./lib/Error");
 
 // Wrap the federator in a module
 module.exports = function(CONFIG, federatorCallback) {
@@ -34,7 +35,7 @@ module.exports = function(CONFIG, federatorCallback) {
 
     // Federator is closed for maintenance
     if(CONFIG.SERVICE_CLOSED) {
-      return res.status(503).send(ERROR.SERVICE_CLOSED);
+      return new FederatorError(req, res, ERROR.SERVICE_CLOSED);
     }
 
     // Client disconnected; kill the handler and propogate
@@ -43,6 +44,7 @@ module.exports = function(CONFIG, federatorCallback) {
       return req.StreamHandler.Kill();
     });
 
+    // Proceed to the next middleware
     next();
 
   });

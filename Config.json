@@ -2,6 +2,7 @@
   "PORT": 3000,
   "HOST": "127.0.0.1",
   "NAME": "NodeJS-Federator",
+  "DOCUMENTATION_URI": "ENTER HERE",
   "LOGPATH": "./logs/",
   "MAXIMUM_NUMBER_OF_THREADS": 10,
   "MAXIMUM_BYTES_FLUSH": 1e8,
