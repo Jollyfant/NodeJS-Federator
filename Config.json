@@ -1,6 +1,6 @@
 {
-  "PORT": 3004,
-  "HOST": "bhlsa05.knmi.nl",
+  "PORT": 3000,
+  "HOST": "127.0.0.1",
   "NAME": "NodeJS-Federator",
   "MAXIMUM_NUMBER_OF_THREADS": 5,
   "MAXIMUM_BYTES_FLUSH": 1e8,
