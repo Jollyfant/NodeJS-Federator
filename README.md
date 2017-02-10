@@ -1,5 +1,5 @@
 # NodeJS-Federator
-NodeJS Implementation of EIDA Federator
+NodeJS Implementation of EIDA Federator.
 
 ## Configuration
 
