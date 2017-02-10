@@ -10,11 +10,12 @@
 
 const StreamHandler = require("../lib/Handler");
 const ERROR = require("../static/Errors");
+const CONFIG = require("../Config");
 const FederatorError = require("../lib/Error");
 
 const DATASELECT_CONTENT_MIME_TYPE = "application/vnd.fdsn.mseed";
 
-module.exports = function(Service, CONFIG) {
+module.exports = function(Service) {
 
   // Dataselect path
   Service.get(CONFIG.BASE_URL + "dataselect/query", function(req, res, next) {

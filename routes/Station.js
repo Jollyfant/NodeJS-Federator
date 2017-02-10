@@ -11,11 +11,12 @@
 
 const StreamHandler = require("../lib/Handler");
 const ERROR = require("../static/Errors");
+const CONFIG = require("../Config");
 const FederatorError = require("../lib/Error");
 
 const STATION_CONTENT_MIME_TYPE = "application/xml";
 
-module.exports = function(Service, CONFIG) {
+module.exports = function(Service) {
 
   // Handle GET Requests
   Service.get(CONFIG.BASE_URL + "station/query", function(req, res, next) {

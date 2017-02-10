@@ -11,8 +11,9 @@
  */
 
 const VERSION_CONTENT_MIME_TYPE = "text/plain";
+const CONFIG = require("../Config");
 
-module.exports = function(Service, CONFIG) {
+module.exports = function(Service) {
 
   Service.get(CONFIG.BASE_URL + "version", function(req, res, next) {
 
