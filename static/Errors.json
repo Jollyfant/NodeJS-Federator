@@ -1,0 +1,18 @@
+{
+  "SERVICE_CLOSED": {
+    "code": 503,
+    "message": "The service is temporarily unavailable for maintenance"
+  },
+  "NO_CONTENT": {
+    "code": 204,
+    "message": "No Content"
+  },
+  "ROUTING_ERROR": {
+    "code": 400,
+    "message": "The routing service returned an error. Not telling you what error yet."
+  },
+  "INVALID_START": "The submitted start time is invalid",
+  "INVALID_END": "The submitted end time is invalid",
+  "START_REQUIRED": "A valid start time is required",
+  "END_REQUIRED": "A valid end time is required"
+}
