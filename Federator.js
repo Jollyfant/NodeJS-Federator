@@ -44,7 +44,26 @@ module.exports = function(CONFIG, federatorCallback) {
       return req.StreamHandler.Kill();
     });
 
-    // Proceed to the next middleware
+    res.on("finish", function() {
+
+      // Log the HTTP request
+      req.StreamHandler.Logger.info({
+        "id": req.StreamHandler.id,
+        "code": res.statusCode,
+        "path": req.path,
+        "client": req.headers["x-forwarded-for"] || req.connection.remoteAddress,
+        "method": req.method,
+        "nBytesTotal": req.StreamHandler.nBytes,
+        "nRoutesFailed": req.StreamHandler.nRoutesFailed,
+        "nRoutesSuccess": req.StreamHandler.nRoutesSuccess,
+        "nRoutesEmpty": req.StreamHandler.nRoutesEmpty,
+        "nRoutesTotal": req.StreamHandler.nRoutes,
+        "msRequestTimeTotal": new Date() - req.StreamHandler.requestSubmitted
+      }, "HTTP Request Summary");
+
+    });
+
+    // Proceed to the next route specific middleware
     next();
 
   });
