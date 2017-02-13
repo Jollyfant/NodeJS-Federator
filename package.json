@@ -1,0 +1,32 @@
+{
+  "name": "federator",
+  "version": "1.0.0",
+  "description": "NodeJS EIDA Federator",
+  "main": "Federator.js",
+  "dependencies": {
+    "bunyan": "^1.8.5",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jollyfant/NodeJS-Federator.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "EIDA",
+    "Federator",
+    "Station",
+    "Dataselect",
+    "Routing"
+  ],
+  "author": "Mathijs Koymans",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Jollyfant/NodeJS-Federator/issues"
+  },
+  "homepage": "https://github.com/Jollyfant/NodeJS-Federator#readme"
+}
