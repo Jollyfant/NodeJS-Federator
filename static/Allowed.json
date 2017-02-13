@@ -1,0 +1,39 @@
+{
+  "DATASELECT": {
+    "net": "stringListWildcards",
+    "network": "stringListWildcards",
+    "sta": "stringListWildcards",
+    "station": "stringListWildcards",
+    "loc": "stringListWildcards",
+    "location": "stringListWildcards",
+    "cha": "stringListWildcards",
+    "channel": "stringListWildcards",
+    "start": null,
+    "starttime": null,
+    "end": null,
+    "endtime": null
+  },
+  "STATION": {
+    "net": "stringListWildcards",
+    "network": "stringListWildcards",
+    "sta": "stringListWildcards",
+    "station": "stringListWildcards",
+    "loc": "stringListWildcards",
+    "location": "stringListWildcards",
+    "cha": "stringListWildcards",
+    "channel": "stringListWildcards",
+    "start": null,
+    "starttime": null,
+    "end": null,
+    "endtime":  null,
+    "level": "level",
+    "latitude": "float",
+    "longitude": "float",
+    "minradius": "float",
+    "maxradius": "float",
+    "minlatitude": "float",
+    "maxlatitude": "float",
+    "minlongitude": "float",
+    "maxlongitude": "float"
+  }
+}

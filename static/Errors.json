@@ -11,6 +11,26 @@
     "code": 400,
     "message": "The routing service returned an error. Not telling you what error yet."
   },
+  "INVALID_PARAMETER": {
+    "code": 400,
+    "message": "An invalid parameter was submitted: %s"
+  },
+  "INVALID_REGEX": {
+    "code": 400,
+    "message": "An invalid regex was submitted: %s"
+  },
+  "QUERY_EMPTY": {
+    "code": 400,
+    "message": "The submitted query string is empty"
+  },
+  "QUERY_LENGTH_EXCEEDED": {
+    "code": 414,
+    "message": "The submitted query string is too long"
+  },
+  "QUERYSTRING_INVALID": {
+    "code": 400,
+    "message": "The submitted query string is invalid"
+  },
   "INVALID_START": {
     "code": 400,
     "message": "The submitted start time is invalid"

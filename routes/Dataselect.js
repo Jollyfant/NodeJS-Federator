@@ -9,7 +9,11 @@
  */
 
 const StreamHandler = require("../lib/Handler");
+
 const ERROR = require("../static/Errors");
+const ALLOWED = require("../static/Allowed");
+const REGEX = require("../static/Regex");
+
 const CONFIG = require("../Config");
 const FederatorError = require("../lib/FederatorError");
 
@@ -19,6 +23,29 @@ module.exports = function(Service) {
 
   // Dataselect path
   Service.get(CONFIG.BASE_URL + "dataselect/query", function(req, res, next) {
+
+    // Check the query string
+    if(!req._parsedUrl.search) {
+      return new FederatorError(req, res, ERROR.QUERY_EMPTY);
+    }
+
+    if(Buffer.byteLength(req._parsedUrl.search) > CONFIG.MAXIMUM_QUERYSTRING_BYTES) {
+      return new FederatorError(req, res, ERROR.QUERY_LENGTH_EXCEEDED); 
+    }
+
+    if(!REGEX["query"].test(req._parsedUrl.search)) {
+      return new FederatorError(req, res, ERROR.QUERYSTRING_INVALID);  
+    }
+
+    // Check allowed parameters from static allowed object
+    for(var key in req.query) {
+      if(!ALLOWED.DATASELECT.hasOwnProperty(key)) {
+        return new FederatorError(req, res, ERROR.INVALID_PARAMETER, key);
+      }
+      if(ALLOWED.DATASELECT[key] && !REGEX[ALLOWED.DATASELECT[key]].test(req.query[key])) {
+        return new FederatorError(req, res, ERROR.INVALID_REGEX, key);
+      }
+    }
 
     // Parse request body
     const stream = {
@@ -65,19 +92,18 @@ module.exports = function(Service) {
     // exhausted.
     req.StreamHandler.Get(stream, function(threadEmitter) {
 
+      // Send the headers
+      threadEmitter.on("header", function() {
+
+        res.setHeader("Content-Type", DATASELECT_CONTENT_MIME_TYPE);
+        res.setHeader("Content-Disposition", "attachment; filename=" + req.StreamHandler.GenerateFilename());
+
+      });
+
       // Callback when data is flushed from a thread
       threadEmitter.on("data", function(thread) {
 
         req.StreamHandler.nBytes += thread.nBytes;
-
-        // Write headers once
-        if(!req.StreamHandler.headersSent) {
-          res.setHeader("Content-Type", DATASELECT_CONTENT_MIME_TYPE);
-          res.setHeader("Content-Disposition", "attachment; filename=" + req.StreamHandler.GenerateFilename());
-          req.StreamHandler.headersSent = true;
-        }
-
-        // Pipe mseed response to user
         res.write(Buffer.concat(thread.dataBuffer));
 
       });

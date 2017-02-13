@@ -1,3 +1,12 @@
+const CONFIG = require("../Config");
+
+const ERROR = require("../static/Errors");
+const ALLOWED = require("../static/Allowed");
+const REGEX = require("../static/Regex");
+
+const StreamHandler = require("../lib/Handler");
+const FederatorError = require("../lib/FederatorError");
+
 /*
  * NodeJS Federator Station Route
  *
@@ -9,17 +18,34 @@
  *
  */
 
-const StreamHandler = require("../lib/Handler");
-const ERROR = require("../static/Errors");
-const CONFIG = require("../Config");
-const FederatorError = require("../lib/FederatorError");
-
-const STATION_CONTENT_MIME_TYPE = "application/xml";
-
 module.exports = function(Service) {
 
   // Handle GET Requests
   Service.get(CONFIG.BASE_URL + "station/query", function(req, res, next) {
+
+    // Check the query string
+    if(!req._parsedUrl.search) {
+      return new FederatorError(req, res, ERROR.QUERY_EMPTY);
+    }
+
+    if(Buffer.byteLength(req._parsedUrl.search) > CONFIG.MAXIMUM_QUERYSTRING_BYTES) {
+      return new FederatorError(req, res, ERROR.QUERY_LENGTH_EXCEEDED); 
+    }
+
+    if(!REGEX["query"].test(req._parsedUrl.search)) {
+      return new FederatorError(req, res, ERROR.QUERYSTRING_INVALID); 
+    }
+
+    // Check for allowed parameters from static allowed object
+    // and check match the input against a valid regex
+    for(var key in req.query) {
+      if(!ALLOWED.STATION.hasOwnProperty(key)) {
+        return new FederatorError(req, res, ERROR.INVALID_PARAMETER, key);
+      }
+      if(ALLOWED.STATION[key] && !REGEX[ALLOWED.STATION[key]].test(req.query[key])) {
+        return new FederatorError(req, res, ERROR.INVALID_REGEX, key);
+      }
+    }
 
     // GET query parameters
     var stream = {
@@ -62,27 +88,27 @@ module.exports = function(Service) {
     }
 
     // Handle the stream
-    // emitter is an event emitter used by the router and threadr
+    // emitter is an event emitter used by the router and threader
     req.StreamHandler.Get(stream, function(threadEmitter) {
+
+      // Callback to send the headers
+      threadEmitter.once("header", function() {
+
+
+        res.setHeader("Content-Type", "application/xml");
+        res.write(GenerateFDSNStationXMLHeaders());
+
+      });
 
       // Callback fired when stationXML is flushed from a thread
       threadEmitter.on("data", function(thread) {
 
         req.StreamHandler.nBytes += thread.nBytes;
-
-        // Set content-type and write the FDSN header once
-        if(!req.StreamHandler.headersSent) {
-          res.setHeader("Content-Type", STATION_CONTENT_MIME_TYPE);
-          res.write(GenerateFDSNStationXMLHeaders());
-          req.StreamHandler.headersSent = true;
-        }
-
-        // Write the payload
         res.write(GetBufferSlice(Buffer.concat(thread.dataBuffer)));
 
       });
 
-      // Callback when the emitter is exhausted
+      // Callback when the emitter is exhausted or an error occured
       threadEmitter.on("end", function(error) {
 
         // If we ended with an error
@@ -96,7 +122,8 @@ module.exports = function(Service) {
         }
 
         // Write the final FDSNStationXML footer and end the request
-        res.write("</FDSNStationXML>"); res.end();
+        res.write("</FDSNStationXML>");
+        res.end();
 
       });
 
@@ -108,10 +135,12 @@ module.exports = function(Service) {
    * Function GetBufferSlice
    *
    * Slices a buffer from start to end
+   *
    */
   function GetBufferSlice(buffer) {
 
     // First and last appearance respectively
+    // we get the buffer slice in between
     var start = buffer.indexOf("<Network");
     var end = buffer.indexOf("</FDSNStationXML>", buffer.length - 25);
 
