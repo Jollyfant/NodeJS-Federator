@@ -99,10 +99,10 @@ module.exports = function(Federator) {
       });
 
       // Callback when data is flushed from a thread
-      threadEmitter.on("data", function(thread) {
+      threadEmitter.on("dataBuffer", function(dataBuffer) {
 
-        req.StreamHandler.nBytes += thread.nBytes;
-        res.write(Buffer.concat(thread.dataBuffer));
+        req.StreamHandler.nBytes += dataBuffer.length;
+        res.write(dataBuffer);
 
       });
 

@@ -27,11 +27,9 @@ module.exports = function(Federator) {
     if(!req._parsedUrl.search) {
       return new FederatorError(req, res, ERROR.QUERY_EMPTY);
     }
-
     if(Buffer.byteLength(req._parsedUrl.search) > CONFIG.MAXIMUM_QUERYSTRING_BYTES) {
       return new FederatorError(req, res, ERROR.QUERY_LENGTH_EXCEEDED); 
     }
-
     if(!REGEX["query"].test(req._parsedUrl.search)) {
       return new FederatorError(req, res, ERROR.QUERYSTRING_INVALID); 
     }
@@ -100,17 +98,17 @@ module.exports = function(Federator) {
       });
 
       // Callback fired when stationXML is flushed from a thread
-      threadEmitter.on("data", function(thread) {
+      threadEmitter.on("dataBuffer", function(dataBuffer) {
 
-        req.StreamHandler.nBytes += thread.nBytes;
-        res.write(GetBufferSlice(Buffer.concat(thread.dataBuffer)));
+        req.StreamHandler.nBytes += dataBuffer.length;
+        res.write(GetBufferSlice(dataBuffer));
 
       });
 
       // Callback when the emitter is exhausted or an error occured
       threadEmitter.on("end", function(error) {
 
-        // If we ended with an error
+        // If we ended with an error (e.g. in routing)
         if(error) {
           return res.status(error.code).send(error.message);
         }
@@ -157,10 +155,10 @@ module.exports = function(Federator) {
 
     // The NodeJS Federator StationXML header
     return [
-      '<FDSNStationXML xmlns="http://www.fdsn.org/xml/station/1" schemaVersion="1.0">',
-      '<Source>' + CONFIG.SOURCE + '</Source>',
-      '<Sender>' + CONFIG.SENDER + '</Sender>',
-      '<Created>' + new Date().toISOString() + '</Created>'
+      "<FDSNStationXML xmlns=\"http://www.fdsn.org/xml/station/1\" schemaVersion=\"1.0\">",
+      "<Source>" + CONFIG.SOURCE + "</Source>",
+      "<Sender>" + CONFIG.SENDER + "</Sender>",
+      "<Created>" + new Date().toISOString() + "</Created>"
     ].join("");
 
   }
