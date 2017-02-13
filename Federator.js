@@ -24,6 +24,7 @@ const ERROR = require("./static/Errors");
 
 const FederatorError = require("./lib/FederatorError");
 const StreamHandler = require("./lib/Handler");
+const Path = require("path");
 
 // Wrap the federator in a module
 module.exports = function(CONFIG, federatorCallback) {
@@ -52,7 +53,7 @@ module.exports = function(CONFIG, federatorCallback) {
       req.StreamHandler.Logger.info({
         "id": req.StreamHandler.id,
         "code": res.statusCode,
-        "path": req.path,
+        "path": Path.relative(CONFIG.BASE_URL, req.path),
         "client": req.headers["x-forwarded-for"] || req.connection.remoteAddress,
         "method": req.method,
         "nBytesTotal": req.StreamHandler.nBytes,
