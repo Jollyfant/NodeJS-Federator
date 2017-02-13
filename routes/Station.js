@@ -18,10 +18,10 @@ const FederatorError = require("../lib/FederatorError");
  *
  */
 
-module.exports = function(Service) {
+module.exports = function(Federator) {
 
   // Handle GET Requests
-  Service.get(CONFIG.BASE_URL + "station/query", function(req, res, next) {
+  Federator.get(CONFIG.BASE_URL + "station/query", function(req, res, next) {
 
     // Check the query string
     if(!req._parsedUrl.search) {
@@ -91,9 +91,8 @@ module.exports = function(Service) {
     // emitter is an event emitter used by the router and threader
     req.StreamHandler.Get(stream, function(threadEmitter) {
 
-      // Callback to send the headers
+      // Callback to send the headers once
       threadEmitter.once("header", function() {
-
 
         res.setHeader("Content-Type", "application/xml");
         res.write(GenerateFDSNStationXMLHeaders());

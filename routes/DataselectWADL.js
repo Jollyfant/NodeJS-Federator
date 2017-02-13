@@ -1,3 +1,6 @@
+const CONFIG = require("../Config");
+const Path = require("path");
+
 /*
  * NodeJS Federator Version Implementation
  *
@@ -10,15 +13,11 @@
  *
  */
 
-const WADL_CONTENT_MIME_TYPE = "application/xml";
-const CONFIG = require("../Config");
-const Path = require("path");
+module.exports = function(Federator) {
 
-module.exports = function(Service) {
+  Federator.get(CONFIG.BASE_URL + "dataselect/application.wadl", function(req, res, next) {
 
-  Service.get(CONFIG.BASE_URL + "dataselect/application.wadl", function(req, res, next) {
-
-    res.setHeader("Content-Type", WADL_CONTENT_MIME_TYPE);
+    res.setHeader("Content-Type", "application/xml");
     res.status(200).sendFile(Path.join(__dirname, "..", "share/dataselect.wadl"));
 
   });

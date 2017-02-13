@@ -17,12 +17,10 @@ const REGEX = require("../static/Regex");
 const CONFIG = require("../Config");
 const FederatorError = require("../lib/FederatorError");
 
-const DATASELECT_CONTENT_MIME_TYPE = "application/vnd.fdsn.mseed";
-
-module.exports = function(Service) {
+module.exports = function(Federator) {
 
   // Dataselect path
-  Service.get(CONFIG.BASE_URL + "dataselect/query", function(req, res, next) {
+  Federator.get(CONFIG.BASE_URL + "dataselect/query", function(req, res, next) {
 
     // Check the query string
     if(!req._parsedUrl.search) {
@@ -92,10 +90,10 @@ module.exports = function(Service) {
     // exhausted.
     req.StreamHandler.Get(stream, function(threadEmitter) {
 
-      // Send the headers
-      threadEmitter.on("header", function() {
+      // Send the headers once
+      threadEmitter.once("header", function() {
 
-        res.setHeader("Content-Type", DATASELECT_CONTENT_MIME_TYPE);
+        res.setHeader("Content-Type", "application/vnd.fdsn.mseed");
         res.setHeader("Content-Disposition", "attachment; filename=" + req.StreamHandler.GenerateFilename());
 
       });

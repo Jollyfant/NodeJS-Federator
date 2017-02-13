@@ -1,3 +1,5 @@
+const CONFIG = require("../Config");
+
 /*
  * NodeJS Federator Version Implementation
  *
@@ -10,14 +12,11 @@
  *
  */
 
-const VERSION_CONTENT_MIME_TYPE = "text/plain";
-const CONFIG = require("../Config");
+module.exports = function(Federator) {
 
-module.exports = function(Service) {
+  Federator.get(CONFIG.BASE_URL + "version", function(req, res, next) {
 
-  Service.get(CONFIG.BASE_URL + "version", function(req, res, next) {
-
-    res.setHeader("Content-Type", VERSION_CONTENT_MIME_TYPE);
+    res.setHeader("Content-Type", "text/plain");
     res.status(200).send(CONFIG.VERSION);
 
   });
