@@ -11,7 +11,7 @@
 const StreamHandler = require("../lib/Handler");
 const ERROR = require("../static/Errors");
 const CONFIG = require("../Config");
-const FederatorError = require("../lib/Error");
+const FederatorError = require("../lib/FederatorError");
 
 const DATASELECT_CONTENT_MIME_TYPE = "application/vnd.fdsn.mseed";
 

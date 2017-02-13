@@ -19,10 +19,11 @@
 
 // Federator is powered by NodeJS Express
 const Federator = require("express")();
-const StreamHandler = require("./lib/Handler");
 
 const ERROR = require("./static/Errors");
-const FederatorError = require("./lib/Error");
+
+const FederatorError = require("./lib/FederatorError");
+const StreamHandler = require("./lib/Handler");
 
 // Wrap the federator in a module
 module.exports = function(CONFIG, federatorCallback) {
@@ -44,6 +45,7 @@ module.exports = function(CONFIG, federatorCallback) {
       return req.StreamHandler.Kill();
     });
 
+    // When the response has finished
     res.on("finish", function() {
 
       // Log the HTTP request
