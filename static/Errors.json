@@ -9,7 +9,7 @@
   },
   "ROUTING_ERROR": {
     "code": 400,
-    "message": "The routing service returned an error. Not telling you what error yet."
+    "message": "No routes could be retrieved"
   },
   "INVALID_PARAMETER": {
     "code": 400,
@@ -17,7 +17,7 @@
   },
   "INVALID_REGEX": {
     "code": 400,
-    "message": "An invalid regex was submitted: %s"
+    "message": "An invalid type was submitted for key: %s"
   },
   "QUERY_EMPTY": {
     "code": 400,

@@ -84,6 +84,7 @@ module.exports = function(CONFIG, federatorCallback) {
   require("./routes/station/query")(Federator);
 
   // Require the .wadls
+  require("./routes/application.wadl")(Federator);
   require("./routes/dataselect/application.wadl")(Federator);
   require("./routes/station/application.wadl")(Federator);
 
