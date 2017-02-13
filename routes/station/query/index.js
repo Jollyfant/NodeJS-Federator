@@ -1,11 +1,11 @@
-const CONFIG = require("../Config");
+const CONFIG = require("../../../Config");
 
-const ERROR = require("../static/Errors");
-const ALLOWED = require("../static/Allowed");
-const REGEX = require("../static/Regex");
+const ERROR = require("../../../static/Errors");
+const ALLOWED = require("../../../static/Allowed");
+const REGEX = require("../../../static/Regex");
 
-const StreamHandler = require("../lib/Handler");
-const FederatorError = require("../lib/FederatorError");
+const StreamHandler = require("../../../lib/Handler");
+const FederatorError = require("../../../lib/FederatorError");
 
 /*
  * NodeJS Federator Station Route

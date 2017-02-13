@@ -1,4 +1,4 @@
-const CONFIG = require("../Config");
+const CONFIG = require("../../Config");
 
 /*
  * NodeJS Federator Version Implementation
