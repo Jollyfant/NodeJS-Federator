@@ -8,14 +8,16 @@
  *
  */
 
-const StreamHandler = require("../../../lib/Handler");
+const PARENT_DIR = "../../../";
 
-const ERROR = require("../../../static/Errors");
-const ALLOWED = require("../../../static/Allowed");
-const REGEX = require("../../../static/Regex");
+const CONFIG = require(PARENT_DIR + "Config");
 
-const CONFIG = require("../../../Config");
-const FederatorError = require("../../../lib/FederatorError");
+const ERROR = require(PARENT_DIR + "static/Errors");
+const ALLOWED = require(PARENT_DIR + "static/Allowed");
+const REGEX = require(PARENT_DIR + "static/Regex");
+
+const StreamHandler = require(PARENT_DIR + "lib/Handler");
+const FederatorError = require(PARENT_DIR + "lib/FederatorError");
 
 module.exports = function(Federator) {
 

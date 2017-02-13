@@ -1,12 +1,3 @@
-const CONFIG = require("../../../Config");
-
-const ERROR = require("../../../static/Errors");
-const ALLOWED = require("../../../static/Allowed");
-const REGEX = require("../../../static/Regex");
-
-const StreamHandler = require("../../../lib/Handler");
-const FederatorError = require("../../../lib/FederatorError");
-
 /*
  * NodeJS Federator Station Route
  *
@@ -17,6 +8,17 @@ const FederatorError = require("../../../lib/FederatorError");
  * :: network, station, location, channel, starttime, endtime, level
  *
  */
+
+const PARENT_DIR = "../../../";
+
+const CONFIG = require(PARENT_DIR + "Config");
+
+const ERROR = require(PARENT_DIR + "static/Errors");
+const ALLOWED = require(PARENT_DIR + "static/Allowed");
+const REGEX = require(PARENT_DIR + "static/Regex");
+
+const StreamHandler = require(PARENT_DIR + "lib/Handler");
+const FederatorError = require(PARENT_DIR + "lib/FederatorError");
 
 module.exports = function(Federator) {
 
