@@ -83,6 +83,7 @@ module.exports = function(CONFIG, federatorCallback) {
   require("./routes/dataselect/query")(Federator);
   require("./routes/station/query")(Federator);
 
+  // Require the .wadls
   require("./routes/dataselect/application.wadl")(Federator);
   require("./routes/station/application.wadl")(Federator);
 
@@ -91,7 +92,7 @@ module.exports = function(CONFIG, federatorCallback) {
 
     // If a callback function was passed
     if(federatorCallback instanceof Function) {
-      federatorCallback("Single Federator has been started.");
+      federatorCallback("NodeJS Federator has been started");
     }
 
   });
