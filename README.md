@@ -26,10 +26,13 @@ NodeJS Implementation of EIDA Federator. Only support for GET requests. The WFCa
 * `MAXIMUM_NUMBER_OF_THREADS` - Number of simultaneous threads
 * `MAXIMUM_BYTES_FLUSH` - Maximum number of bytes cached in memory for a single thread before flushing
 * `MAXIMUM_QUERYSTRING_BYTES` - Maximum URI length allowed
+* `MAXIMUM_NUMBER_OF_WORKERS` - Maximum number of processes started in a cluster
 * `VERSION` - Service version
 * `SENDER` - Sender of FDSNStationXML document
 * `SOURCE` - Source of FDSNStationXML document
 * `THREAD_TIMEOUT_MS` - Number of miliseconds after which a thread is aborted
+* `FEDERATOR_TIMEOUT` - Timeout requests after number of miliseconds (0 to disable)
 * `BASE_URL` - Base path to expose the Federator on
 * `ROUTING_HOST` - Host of the routing service
+* `RESPAWN` - Respawn worker if it dies
 * `SERVICE_CLOSED` - Service closed for maintenance
