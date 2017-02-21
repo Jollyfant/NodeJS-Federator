@@ -33,17 +33,19 @@ module.exports = function(CONFIG, federatorCallback) {
    */
 
   // Default request handler
-  require("./routes/all")(Federator);
+  require("./routes")(Federator);
 
   // Require the paths
   require("./routes/version")(Federator);
   require("./routes/dataselect/query")(Federator);
   require("./routes/station/query")(Federator);
+  require("./routes/wfcatalog/query")(Federator);
 
   // Require the .wadls
   require("./routes/application.wadl")(Federator);
   require("./routes/dataselect/application.wadl")(Federator);
   require("./routes/station/application.wadl")(Federator);
+  require("./routes/wfcatalog/application.wadl")(Federator);
 
   // Listen to incoming HTTP requests
   var server = Federator.listen(CONFIG.PORT, CONFIG.HOST, function() {

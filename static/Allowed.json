@@ -35,5 +35,20 @@
     "maxlatitude": "float",
     "minlongitude": "float",
     "maxlongitude": "float"
+  },
+  "WFCATALOG": {
+    "net": "stringListWildcards",
+    "network": "stringListWildcards",
+    "sta": "stringListWildcards",
+    "station": "stringListWildcards",
+    "loc": "stringListWildcards",
+    "location": "stringListWildcards",
+    "cha": "stringListWildcards",
+    "channel": "stringListWildcards",
+    "start": null,
+    "starttime": null,
+    "end": null,
+    "endtime":  null,
+    "include": "include" 
   }
 }

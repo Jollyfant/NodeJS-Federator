@@ -1,7 +1,7 @@
-const CONFIG = require("../../Config");
+const CONFIG = require("../Config");
 const Path = require("path");
-const FederatorError = require("../../lib/FederatorError");
-const StreamHandler = require("../../lib/Handler");
+const FederatorError = require("../lib/FederatorError");
+const StreamHandler = require("../lib/Handler");
 
 module.exports = function(Service) {
 
