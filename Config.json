@@ -1,7 +1,7 @@
 {
   "PORT": 3000,
   "HOST": "127.0.0.1",
-  "NAME": "NodeJS-Federator",
+  "NAME": "nodejs-federator",
   "DOCUMENTATION_URI": "ENTER HERE",
   "LOGPATH": "./logs/",
   "MAXIMUM_NUMBER_OF_THREADS": 12,
@@ -14,7 +14,7 @@
   "THREAD_TIMEOUT_MS": 20000,
   "FEDERATOR_TIMEOUT": 0,
   "BASE_URL": "/eidaws/federator/1/",
-  "ROUTING_HOST": "http://geofon.gfz-potsdam.de/eidaws/routing/1/query",
+  "ROUTING_HOST": "http://www.orfeus-eu.org/eidaws/routing/1/query",
   "RESPAWN": true,
   "SERVICE_CLOSED": false
 }
