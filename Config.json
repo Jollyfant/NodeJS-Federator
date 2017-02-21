@@ -7,6 +7,7 @@
   "MAXIMUM_NUMBER_OF_THREADS": 12,
   "MAXIMUM_BYTES_FLUSH": 1e8,
   "MAXIMUM_QUERYSTRING_BYTES": 1e4,
+  "MAXIMUM_NUMBER_OF_WORKERS": 4,
   "VERSION": "1.0.0",
   "SENDER": "ORFEUS Data Center",
   "SOURCE": "NodeJS EIDA Federator",
@@ -14,5 +15,6 @@
   "FEDERATOR_TIMEOUT": 0,
   "BASE_URL": "/eidaws/federator/1/",
   "ROUTING_HOST": "http://eidaws.ipgp.fr/eidaws/routing/1/query",
+  "RESPAWN": true,
   "SERVICE_CLOSED": false
 }

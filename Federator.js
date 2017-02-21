@@ -23,9 +23,10 @@
 
 // Federator is powered by NodeJS Express
 const Federator = require("express")();
+const CONFIG = require("./Config");
 
 // Wrap the federator in a module
-module.exports = function(CONFIG, federatorCallback) {
+module.exports = function(federatorCallback) {
 
   /*
    * Require the Federator Routes:
@@ -81,10 +82,8 @@ module.exports = function(CONFIG, federatorCallback) {
 // Called directly
 if(require.main === module) {
 
-  const CONFIG = require("./Config");
-
   // Start a single federator
-  new module.exports(CONFIG, function(message) {
+  new module.exports(function(message) {
     console.log(message);
   });
 
