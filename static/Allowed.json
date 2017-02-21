@@ -52,6 +52,7 @@
     "include": "include",
     "quality": "quality",
     "format": "formatWFCatalog",
+    "gran": "granularity",
     "granularity": "granularity",
     "minlen": "float",
     "minimumlength": "float",

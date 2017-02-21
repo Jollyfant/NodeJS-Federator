@@ -58,7 +58,10 @@ module.exports = function(Federator) {
       "service": "wfcatalog",
       "format": "get",
       "extension": {
-        "include": req.query.level || null,
+        "include": req.query.include || null,
+        "quality": req.query.quality || null,
+        "format": req.query.format || null,
+        "granularity": req.query.gran || req.query.granularity || null
       }
     }
 
@@ -95,6 +98,8 @@ module.exports = function(Federator) {
       threadEmitter.on("dataBuffer", function(dataBuffer) {
 
         req.StreamHandler.nBytes += dataBuffer.length;
+
+        // Cut off the start and end of buffer
         res.write(dataBuffer.slice(1, dataBuffer.length - 1));
 
       });
