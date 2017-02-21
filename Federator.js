@@ -13,6 +13,10 @@
  * >>> latitude, longitude, minradius, maxradius
  * >>> minlatitude, maxlatitude, minlongitude, maxlontigude
  *
+ * WFCatalog allowed parametes:
+ * >>> net(work), sta(tion), loc(ation), cha(nnel), start(time) & end(time)
+ * >>> include
+ * 
  */
 
 "use strict";
@@ -25,10 +29,20 @@ module.exports = function(CONFIG, federatorCallback) {
 
   /*
    * Require the Federator Routes:
+   * WFCatalog is currently not implemented in routing
    *
-   * > version
-   * > dataselect/query
-   * > station/query
+   * |--routes
+   *   |--version
+   *   |--application.wadl
+   *   |--dataselect
+   *     |--query
+   *     |--application.wadl
+   *   |--wfcatalog
+   *     |--query
+   *     |--application.wadl
+   *   |-- station
+   *     |--query
+   *     |--application.wadl
    *
    */
 
@@ -37,12 +51,14 @@ module.exports = function(CONFIG, federatorCallback) {
 
   // Require the paths
   require("./routes/version")(Federator);
+  require("./routes/application.wadl")(Federator);
+
+  // Query implementations
   require("./routes/dataselect/query")(Federator);
   require("./routes/station/query")(Federator);
   require("./routes/wfcatalog/query")(Federator);
 
   // Require the .wadls
-  require("./routes/application.wadl")(Federator);
   require("./routes/dataselect/application.wadl")(Federator);
   require("./routes/station/application.wadl")(Federator);
   require("./routes/wfcatalog/application.wadl")(Federator);
