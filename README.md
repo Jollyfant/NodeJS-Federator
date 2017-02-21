@@ -1,5 +1,16 @@
 # NodeJS-Federator
-NodeJS Implementation of EIDA Federator.
+NodeJS Implementation of EIDA Federator. Only support for GET requests. The WFCatalog queries are not being routed and will not work.
+
+## Routes
+
+* `/version`
+* `/application.wadl`
+* `/station/query`
+* `/station/application.wadl`
+* `/dataselect/query`
+* `/dataselect/application.wadl`
+* `/wfcatalog/query`
+* `/wfcatalog/application.wadl`
 
 ## Configuration
 
