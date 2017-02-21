@@ -14,7 +14,7 @@
   "THREAD_TIMEOUT_MS": 20000,
   "FEDERATOR_TIMEOUT": 0,
   "BASE_URL": "/eidaws/federator/1/",
-  "ROUTING_HOST": "http://eidaws.ipgp.fr/eidaws/routing/1/query",
+  "ROUTING_HOST": "http://geofon.gfz-potsdam.de/eidaws/routing/1/query",
   "RESPAWN": true,
   "SERVICE_CLOSED": false
 }

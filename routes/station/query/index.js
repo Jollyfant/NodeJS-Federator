@@ -17,7 +17,7 @@ const ERROR = require(PARENT_DIR + "static/Errors");
 const ALLOWED = require(PARENT_DIR + "static/Allowed");
 const REGEX = require(PARENT_DIR + "static/Regex");
 
-const StreamHandler = require(PARENT_DIR + "lib/Handler");
+const RequestHandler = require(PARENT_DIR + "lib/Handler");
 const FederatorError = require(PARENT_DIR + "lib/FederatorError");
 
 module.exports = function(Federator) {
@@ -89,7 +89,7 @@ module.exports = function(Federator) {
 
     // Handle the stream
     // emitter is an event emitter used by the router and threader
-    req.StreamHandler.Get(stream, function(threadEmitter) {
+    req.RequestHandler.Get(stream, function(threadEmitter) {
 
       // Callback to send the headers once
       threadEmitter.once("header", function() {
@@ -102,7 +102,7 @@ module.exports = function(Federator) {
       // Callback fired when stationXML is flushed from a thread
       threadEmitter.on("dataBuffer", function(dataBuffer) {
 
-        req.StreamHandler.nBytes += dataBuffer.length;
+        req.RequestHandler.nBytes += dataBuffer.length;
         res.write(GetBufferSlice(dataBuffer));
 
       });
@@ -116,7 +116,7 @@ module.exports = function(Federator) {
         }
 
         // No bytes shipped forward 204
-        if(!req.StreamHandler.nBytes) {
+        if(!req.RequestHandler.nBytes) {
           return res.status(204).end();
         }
 

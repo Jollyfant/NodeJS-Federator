@@ -16,7 +16,7 @@ const ERROR = require(PARENT_DIR + "static/Errors");
 const ALLOWED = require(PARENT_DIR + "static/Allowed");
 const REGEX = require(PARENT_DIR + "static/Regex");
 
-const StreamHandler = require(PARENT_DIR + "lib/Handler");
+const RequestHandler = require(PARENT_DIR + "lib/Handler");
 const FederatorError = require(PARENT_DIR + "lib/FederatorError");
 
 module.exports = function(Federator) {
@@ -90,20 +90,20 @@ module.exports = function(Federator) {
     // we pipe the result to the user.
     // the "end" event is fired when all federated requests have been
     // exhausted.
-    req.StreamHandler.Get(stream, function(threadEmitter) {
+    req.RequestHandler.Get(stream, function(threadEmitter) {
 
       // Send the headers once
       threadEmitter.once("header", function() {
 
         res.setHeader("Content-Type", "application/vnd.fdsn.mseed");
-        res.setHeader("Content-Disposition", "attachment; filename=" + req.StreamHandler.GenerateFilename());
+        res.setHeader("Content-Disposition", "attachment; filename=" + req.RequestHandler.GenerateFilename());
 
       });
 
       // Callback when data is flushed from a thread
       threadEmitter.on("dataBuffer", function(dataBuffer) {
 
-        req.StreamHandler.nBytes += dataBuffer.length;
+        req.RequestHandler.nBytes += dataBuffer.length;
         res.write(dataBuffer);
 
       });
@@ -118,7 +118,7 @@ module.exports = function(Federator) {
         }
 
         // No bytes shipped end with 204
-        if(!req.StreamHandler.nBytes) {
+        if(!req.RequestHandler.nBytes) {
           return res.status(204).end();
         }
 
