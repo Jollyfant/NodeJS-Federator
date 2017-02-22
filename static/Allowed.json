@@ -59,7 +59,9 @@
     "longestonly": "boolean",
     "csegments": "boolean",
     "sample_rate": "float",
-    "record_length": "float",
+    "record_length": "float"
+  },
+  "WFCATALOG_METRICS": {
     "num_samples": "float",
     "sample_max": "float",
     "sample_min": "float",
@@ -86,8 +88,8 @@
     "timing_correction": "float",
     "amplifier_saturation": "float",
     "digitizer_clipping": "float",
-    "spikes": "float",
-    "glitches": "float",
+    "spikes": "int",
+    "glitches": "int",
     "missing_padded_data": "float",
     "telemetry_sync_error": "float",
     "digital_filter_charging": "float",
